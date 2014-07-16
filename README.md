@@ -1,4 +1,4 @@
 PlainCrypto
 ===========
 
-Simple implementation of AES, DES and 3DES for .NET
+Simple implementation of AES and 3DES for .NET
