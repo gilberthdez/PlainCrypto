@@ -5,7 +5,7 @@ using PlainCrypto;
 namespace PlainCryptoTest
 {
     [TestClass]
-    public class CryptoAESTest
+    public class CryptoAES_Test
     {
         [TestMethod]
         public void CryptoAES128_EncryptionTest()
