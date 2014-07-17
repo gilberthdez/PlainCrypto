@@ -16,7 +16,7 @@ namespace PlainCrypto
         {
             if (iv != null && iv.Length != 16)
             {
-                throw new System.ArgumentException("Invalid IV length for an AES Implementation. IV Length must be 16");
+                throw new System.ArgumentException("Invalid IV length. IV Length must be 16");
             }
             else
             {
@@ -29,7 +29,7 @@ namespace PlainCrypto
             }
             else
             {
-                throw new System.ArgumentException("Invalid key length for an AES implementetion. Key length must be 16(AES128), 24(AES192) or 32(AES256)");
+                throw new System.ArgumentException("Invalid key length. Key length must be 16(AES128), 24(AES192) or 32(AES256)");
             }
         }
 
@@ -42,14 +42,14 @@ namespace PlainCrypto
                 using(AesCryptoServiceProvider provider = new AesCryptoServiceProvider())
                 {
                     provider.Key = this.key;
+                    provider.IV = (this.iv != null) ? this.iv : provider.IV;
 
-                    if (this.iv != null)
-                    {
-                        provider.IV = this.iv;
-                    }
                     using (MemoryStream msEncrypt = new MemoryStream())
                     {
-                        msEncrypt.Write(provider.IV, 0, 16);
+                        if (this.iv == null)
+                        {
+                            msEncrypt.Write(provider.IV, 0, 16);
+                        }
                         using (ICryptoTransform encryptor = provider.CreateEncryptor())
                         {
                             using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
@@ -79,9 +79,16 @@ namespace PlainCrypto
 
                     using (MemoryStream msDecrypt = new MemoryStream(data))
                     {
-                        byte[] iv = new byte[16];
-                        msDecrypt.Read(iv, 0, 16);
-                        provider.IV = iv;
+                        if (this.iv == null)
+                        {
+                            byte[] iv = new byte[16];
+                            msDecrypt.Read(iv, 0, 16);
+                            provider.IV = iv;
+                        }
+                        else
+                        {
+                            provider.IV = this.iv;
+                        }
 
                         using (ICryptoTransform decryptor = provider.CreateDecryptor())
                         {
