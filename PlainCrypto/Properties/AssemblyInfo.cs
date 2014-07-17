@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PlainCrypto")]
-[assembly: AssemblyDescription("Simple implementation of common Cryptographic algorithms")]
+[assembly: AssemblyDescription("Simple implementation of common cryptographic algorithms for .NET")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PlainCrypto")]

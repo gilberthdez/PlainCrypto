@@ -2,7 +2,7 @@
  */
 using System;
 
-namespace PlainCrypto
+namespace PlainCrypto.Abstract
 {
     public interface ICrypto
     {
