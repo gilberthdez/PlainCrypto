@@ -89,5 +89,81 @@ namespace PlainCryptoTest
             Assert.AreNotEqual(originalMessage, encryptedMessage);
             Assert.AreEqual(originalMessage, decryptedMessage);
         }
+
+        [TestMethod]
+        public void Crypto3DES_2Keys_Bundled_FixedIV_Test()
+        {
+            //Arrange
+            byte[] keyBundle = { 8, 207, 159, 63, 78, 21, 2, 16, 158, 23, 64, 96, 57, 225, 36, 85 };
+            byte[] iv = { 63, 208, 159, 46, 37, 77, 1, 59 };
+
+            CryptoSymmetric crypto = new Crypto3DES(keyBundle);
+            crypto.SetIV(iv);
+            string originalMessage = "I love cryptography and TripleDES with two 64-bits keys";
+            string encryptedMessage = crypto.Encrypt(originalMessage);
+
+            //Act
+            string decryptedMessage = crypto.Decrypt(encryptedMessage);
+
+            //Assert
+            Assert.AreNotEqual(originalMessage, encryptedMessage);
+            Assert.AreEqual(originalMessage, decryptedMessage);
+        }
+
+        [TestMethod]
+        public void Crypto3DES_2Keys_Bundled_RandomIV_Test()
+        {
+            //Arrange
+            byte[] keyBundle = { 8, 207, 159, 63, 78, 21, 2, 16, 158, 23, 64, 96, 57, 225, 36, 85 };
+
+            CryptoSymmetric crypto = new Crypto3DES(keyBundle);
+            string originalMessage = "I love cryptography and TripleDES with two 64-bits keys";
+            string encryptedMessage = crypto.Encrypt(originalMessage);
+
+            //Act
+            string decryptedMessage = crypto.Decrypt(encryptedMessage);
+
+            //Assert
+            Assert.AreNotEqual(originalMessage, encryptedMessage);
+            Assert.AreEqual(originalMessage, decryptedMessage);
+        }
+
+        [TestMethod]
+        public void Crypto3DES_3Keys_Bundled_FixedIV_Test()
+        {
+            //Arrange
+            byte[] keyBundle = { 8, 207, 159, 63, 78, 21, 2, 16, 158, 23, 64, 96, 57, 225, 36, 85, 49, 7, 210, 96, 13, 71, 62, 90 };
+            byte[] iv = { 63, 208, 159, 46, 37, 77, 1, 59 };
+
+            CryptoSymmetric crypto = new Crypto3DES(keyBundle);
+            crypto.SetIV(iv);
+            string originalMessage = "I love cryptography and TripleDES with three 64-bits keys";
+            string encryptedMessage = crypto.Encrypt(originalMessage);
+
+            //Act
+            string decryptedMessage = crypto.Decrypt(encryptedMessage);
+
+            //Assert
+            Assert.AreNotEqual(originalMessage, encryptedMessage);
+            Assert.AreEqual(originalMessage, decryptedMessage);
+        }
+
+        [TestMethod]
+        public void Crypto3DES_3Keys_Bundled_RandomIV_Test()
+        {
+            //Arrange
+            byte[] keyBundle = { 8, 207, 159, 63, 78, 21, 2, 16, 158, 23, 64, 96, 57, 225, 36, 85, 49, 7, 210, 96, 13, 71, 62, 90 };
+
+            CryptoSymmetric crypto = new Crypto3DES(keyBundle);
+            string originalMessage = "I love cryptography and TripleDES with three 64-bits keys";
+            string encryptedMessage = crypto.Encrypt(originalMessage);
+
+            //Act
+            string decryptedMessage = crypto.Decrypt(encryptedMessage);
+
+            //Assert
+            Assert.AreNotEqual(originalMessage, encryptedMessage);
+            Assert.AreEqual(originalMessage, decryptedMessage);
+        }
     }
 }
