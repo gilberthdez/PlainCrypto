@@ -37,13 +37,13 @@ namespace PlainCrypto
         {
             this.cryptoServiceProvider = new TripleDESCryptoServiceProvider();
 
-            if (this.cryptoServiceProvider.LegalKeySizes[0].MaxSize / 3  != key1.Length * 8)
+            if (!this.cryptoServiceProvider.ValidKeySize(3 * key1.Length * 8))
             {
                 throw new System.ArgumentException("Invalid key size.","key1",
                     new System.Exception("The supplied key is not valid for the TripleDES specification. The valid key size is 64(8)-Bits(Bytes)."));
             }
 
-            if (this.cryptoServiceProvider.LegalKeySizes[0].MaxSize / 3 != key2.Length * 8)
+            if (!this.cryptoServiceProvider.ValidKeySize(3 * key2.Length * 8))
             {
                 throw new System.ArgumentException("Invalid key size.", "key2",
                     new System.Exception("The supplied key is not valid for the TripleDES specification. The valid key size is 64(8)-Bits(Bytes)."));
@@ -51,7 +51,7 @@ namespace PlainCrypto
 
             if (key3 != null)
             {
-                if (this.cryptoServiceProvider.LegalKeySizes[0].MaxSize / 3 != key3.Length * 8)
+                if (!this.cryptoServiceProvider.ValidKeySize(3 * key3.Length * 8))
                 {
                     throw new System.ArgumentException("Invalid key size.", "key3",
                         new System.Exception("The supplied key is not valid for the TripleDES specification. The valid key size is 64(8)-Bits(Bytes)."));
@@ -94,15 +94,13 @@ namespace PlainCrypto
         {
             this.cryptoServiceProvider = new TripleDESCryptoServiceProvider();
             
-            if (this.cryptoServiceProvider.ValidKeySize(keyBundle.Length * 8))
-            {
-                this.cryptoServiceProvider.Key = keyBundle;
-            }
-            else
+            if (!this.cryptoServiceProvider.ValidKeySize(keyBundle.Length * 8))
             {
                 throw new System.ArgumentException("Invalid keyBundle size.",
-                        new System.Exception("The supplied keyBundle is not valid for the TripleDES specification. The valid key bundle sizes are 128(16) and 192(24)-Bits(Bytes)."));  
+                        new System.Exception("The supplied keyBundle is not valid for the TripleDES specification. The valid key bundle sizes are 128(16) and 192(24)-Bits(Bytes)."));   
             }
+
+            this.cryptoServiceProvider.Key = keyBundle;
         }
 
         /// <summary>
@@ -120,15 +118,13 @@ namespace PlainCrypto
         /// </exception>
         public override void SetIV(byte[] iv)
         {
-            if (this.cryptoServiceProvider.LegalBlockSizes[0].MaxSize == iv.Length * 8)
-            {
-                this.cryptoServiceProvider.IV = iv;
-            }
-            else
+            if (!(this.cryptoServiceProvider.LegalBlockSizes[0].MaxSize == iv.Length * 8))
             {
                 throw new System.ArgumentException("Invalid IV size.",
                     new System.Exception("The supplied IV is not valid for the TripleDES specification. The IV size must be 64(8)-Bits(Bytes)"));
             }
+
+            this.cryptoServiceProvider.IV = iv;
         }
     }
 }

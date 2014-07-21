@@ -50,15 +50,13 @@ namespace PlainCrypto
         /// </exception>
         public override void SetIV(byte[] iv)
         {
-            if (this.cryptoServiceProvider.LegalBlockSizes[0].MaxSize == iv.Length * 8)
-            {
-                this.cryptoServiceProvider.IV = iv;
-            }
-            else
+            if (!(this.cryptoServiceProvider.LegalBlockSizes[0].MaxSize == iv.Length * 8))
             {
                 throw new System.ArgumentException("Invalid IV size.",
                     new System.Exception("The supplied IV is not valid for the AES specification. The IV size must be 128(16)-Bits(Bytes)"));
             }
+
+            this.cryptoServiceProvider.IV = iv;
         }
     }
 }

@@ -44,6 +44,7 @@
     <Compile Include="CryptoAES.cs" />
     <Compile Include="Abstract\CryptoSymmetric.cs" />
     <Compile Include="Abstract\ICrypto.cs" />
+    <Compile Include="CryptoDES.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
