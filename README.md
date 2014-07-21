@@ -58,6 +58,12 @@ Technical Notes
 + The IV is written/read at/from the beginning of the result.
 
 
+Dependencies
+============
+
+System.Security(.NETFramework, Version=3.5)
+
+
 License
 =======
 
