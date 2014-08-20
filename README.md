@@ -47,7 +47,7 @@ decryptedMessage = crypto.Decrypt(encryptedMessage)
 
 *Crypto3DES supports two or three key operation with the option to bundle all the keys in a single buffer. 
 
-**Setting an IV is optional for all the cryptos. By default the IV will be generated automatically at instantiation. 
+**Setting an IV is optional for all the cryptos. By default the IV will be generated automatically at instantiation and is always regenerated after each encryption.
 
 
 Technical Notes
