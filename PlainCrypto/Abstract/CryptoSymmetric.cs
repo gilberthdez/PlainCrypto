@@ -41,6 +41,7 @@ namespace PlainCrypto.Abstract
                             csEncrypt.Write(data, 0, data.Length);
                             csEncrypt.FlushFinalBlock();
 
+                            this.cryptoServiceProvider.GenerateIV();
                             return Convert.ToBase64String(msEncrypt.ToArray());
                         }
                     }
